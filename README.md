@@ -1,4 +1,4 @@
-# LLib
+# LFLib
 This module provides a variety of quality of life functions. Some notable examples are: <br>
 	- printing without starting a newline<br>
 	- printing arguments with a single command that can't be joined with "+" like Strings<br>
