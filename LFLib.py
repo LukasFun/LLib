@@ -1,3 +1,5 @@
+# Copyright (c) 2024 Lukas Freudenberg
+# 
 # Permission is hereby granted, free of charge, to any person 
 # obtaining a copy of this software and associated documentation 
 # files (the "Software"), to deal in the Software without 
@@ -18,63 +20,72 @@
 # FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 # OTHER DEALINGS IN THE SOFTWARE.
 
-# 28.12.2023, version 0.3.1
+# 23.04.2024, version 0.3.6
 # This module provides a variety of quality of life functions. Some notable examples are:
 #	- printing without starting a newline
-#	- printing arguments with a single command that can't be joined with "+" like Strings
+#	- printing arguments with a single command that can't be joined with "+" like strings
 #	- converting a number to a string with nice formatting
-#	- a data tip for matplotlib and other useful things for displaying data
+#	- a data tip and other useful things for displaying data with matplotlib
 #	- a threaded serial port
+#
 # Changelog
-#	- 28.12.2023: Removed functionality for communication between a process and its subprocesses using files, multiprocessing with communication relying on managed lists is planned
-#	- 27.12.2023: Renamed and continued as LLib,
-#				  added functionality to print multiple arguments,
-#				  added functionality to get the path of the binary executing the parent script,
-#				  added functionality for communication between a process and its subprocesses using files
-#	- 14.10.2022: Added functionality to automatically connect to a serial port when multiple devices are connected,
-#				  fixed a bug that caused the module to break under windows
-#	- 04.10.2022: Added functionality to save only the data of individual lines
-#	- 30.09.2022: Added functionality to update the line object of the data tip
-#	- 27.06.2022: Changed serial port functionality to not raise an exception and output a warning instead for writes
-#	- 22.06.2022: Fixed a bug that caused the axis rescaling to not work properly for singular value plots
-#	- 21.06.2022: Added functionality to save the data of a figure as a .csv file,
-#				  added functionality to get all visible plots (lines) from an axis,
-#				  added functionality to create a data tip for all plots of an axis,
-#				  fixed a bug that caused the save path to crash if non integer values were present in the file name
-#	- 13.06.2022: Added functionality to save the data of a plot as a .csv file
-#	- 08.06.2022: Fixed a bug in logarithmic axis scaling,
-#				  fixed a bug in number formating for Inf and NaN values,
-#				  fixed a bug that caused the y-axis to not take into account all visible plots
-#	- 07.06.2022: Added functionality to correctly rescale axes where matplotlib fails
-#	- 31.05.2022: Fixed a bug that caused the consecutive file naming to sort the files incorrectly
-#	- 30.05.2022: Changed data tip annotation to automatic string formatting,
-#				  added functionality to auto format integers
-#	- 17.05.2022: Added functionality to format a number automatically
-#	- 16.05.2022: Added functionality to disable data tip via function
-#	- 12.05.2022: Added option for background color to data tip
-#	- 10.05.2022: Added functionality for data tips
-#				  added functionality for calculating euclidian distances,
-#				  added functionality for getting the closest point in an n-dimensional data set to given coordinates using a summation norm
-#   - 29.04.2022: Removed unnecessary elements from vertical toolbar,
-#				 added functionality to convert a string to a number with respect to German point notation
-#   - 26.04.2022: Added function to enumerate files
-#	- 19.04.2022: Added modular GUI building function,
-#				  added vertical matplotlib toolbar
-#   - 08.04.2022: Removed debugging code
-#   - 05.04.2022: Added license directly to sourcecode
-#   - 31.03.2022: Removed documentation about custom usage since the library is now available on PyPI,
-#				 fixed a bug in the buffer clearing of the serial port
-#   - 14.02.2022: Created a workaround for a bug that caused the serial buffer to not clear properly
-#				  unless updating some specific element in a gui
-#   - 26.01.2022: Fixed a bug that caused writing to a port to fail after a reconnect,
-#				 lowered reconnect speed in favour of stability
-#   - 19.01.2022: Added functionality to read data from a serial port via a thread
-#   - 14.01.2022: Added functionality to update a canvas with optional refitting of the data,
-#				 added functionality for reading raw bytes from serial port
-#   - 11.01.2022: Added functionality to update a canvas when an included plot has its data changed
-#   - 10.01.2022: Added functionality for serial ports including automatically re-establishing connection, if disconnected
-#   - 07.01.2022: Initial version
-
+#	- 23.04.2024:	Added functionality to remove an item and all its associated data from a collection of lists,
+#					added functionality to recursively remove a tkinter widget and all its children (including from any list they and their data might live in)
+#	- 12.04.2024:	Fixed a bug that caused an error when trying to get a file name from an invalid path,
+#					added functionality to get a file name for a file without cropping the extension and files without an extension
+#	- 09.04.2024:	Added functionality to get a file name from a file path
+#	- 08.03.2024:	Added functionality to reorder a list according to a given order
+#	- 25.02.2024:	Added functionality to convert a string to a number of seconds
+#	- 18.01.2024:	Fixed a bug that caused a crash when trying to automatically open a serial port with no device plugged in
+#	- 28.12.2023:	Removed functionality for communication between a process and its subprocesses using files, multiprocessing with communication relying on managed lists is planned
+#	- 27.12.2023:	Renamed and continued as LFLib,
+#					added functionality to print multiple arguments,
+#					added functionality to get the path of the binary executing the parent script,
+#					added functionality for communication between a process and its subprocesses using files
+#	- 14.10.2022:	Added functionality to automatically connect to a serial port when multiple devices are connected,
+#					fixed a bug that caused the module to break under windows
+#	- 04.10.2022:	Added functionality to save only the data of individual lines
+#	- 30.09.2022:	Added functionality to update the line object of the data tip
+#	- 27.06.2022:	Changed serial port functionality to not raise an exception and output a warning instead for writes
+#	- 22.06.2022:	Fixed a bug that caused the axis rescaling to not work properly for singular value plots
+#	- 21.06.2022:	Added functionality to save the data of a figure as a .csv file,
+#					added functionality to get all visible plots (lines) from an axis,
+#					added functionality to create a data tip for all plots of an axis,
+#					fixed a bug that caused the save path to crash if non integer values were present in the file name
+#	- 13.06.2022:	Added functionality to save the data of a plot as a .csv file
+#	- 08.06.2022:	Fixed a bug in logarithmic axis scaling,
+#					fixed a bug in number formating for Inf and NaN values,
+#					fixed a bug that caused the y-axis to not take into account all visible plots
+#	- 07.06.2022:	Added functionality to correctly rescale axes where matplotlib fails
+#	- 31.05.2022:	Fixed a bug that caused the consecutive file naming to sort the files incorrectly
+#	- 30.05.2022:	Changed data tip annotation to automatic string formatting,
+#					added functionality to auto format integers
+#	- 17.05.2022:	Added functionality to format a number automatically
+#	- 16.05.2022:	Added functionality to disable data tip via function
+#	- 12.05.2022:	Added option for background color to data tip
+#	- 10.05.2022:	Added functionality for data tips
+#					added functionality for calculating euclidian distances,
+#					added functionality for getting the closest point in an n-dimensional data set to given coordinates using a summation norm
+#   - 29.04.2022:	Removed unnecessary elements from vertical toolbar,
+#					added functionality to convert a string to a number with respect to German point notation
+#   - 26.04.2022:	Added function to enumerate files
+#	- 19.04.2022:	Added modular GUI building function,
+#					added vertical matplotlib toolbar
+#   - 08.04.2022:	Removed debugging code
+#   - 05.04.2022:	Added license directly to sourcecode
+#   - 31.03.2022:	Removed documentation about custom usage since the library is now available on PyPI,
+#					fixed a bug in the buffer clearing of the serial port
+#   - 14.02.2022:	Created a workaround for a bug that caused the serial buffer to not clear properly
+#					unless updating some specific element in a gui
+#   - 26.01.2022:	Fixed a bug that caused writing to a port to fail after a reconnect,
+#					lowered reconnect speed in favour of stability
+#   - 19.01.2022:	Added functionality to read data from a serial port via a thread
+#   - 14.01.2022:	Added functionality to update a canvas with optional refitting of the data,
+#					added functionality for reading raw bytes from serial port
+#   - 11.01.2022:	Added functionality to update a canvas when an included plot has its data changed
+#   - 10.01.2022:	Added functionality for serial ports including automatically re-establishing connection, if disconnected
+#   - 07.01.2022:	Initial version
+		
 import serial
 import time
 import tkinter as tk
@@ -128,6 +139,64 @@ def fstr(a, point=2):
 			return "{0:.{1}e}".format(a, point)
 		else:
 			return "{0:.{1}f}".format(a, point)
+
+# Converts a string into a time in seconds
+# 
+# @param t string in the format mm:ss or h:mm:ss
+# @return number or seconds
+def timeToSeconds(t):
+	# Check if the input is a string
+	if not isinstance(t, str):
+		pln("Input ", t, " is not a string.")
+		return None
+	# Check if the input has the correct format and determine if hours are given
+	correctForm = True
+	hours = False
+	if not t[-3] == ":":
+		correctForm = False
+	if len(t) >= 6:
+		if t[-6] == ":":
+			hours = True
+		else:
+			correctForm = False
+	if not correctForm:
+		pln("Input ", t, " does not have a proper format.")
+		return None
+	# Convert input to number of seconds
+	seconds = 0
+	seconds += int(t[-2:])
+	seconds += 60 * int(t[-5:-3])
+	if hours:
+		seconds += 3600 * int(t[:-6])
+	return seconds
+
+# Brings a list into a given new order
+# 
+# @param a list to be reordered
+# @param order list containing the new indices as integers - eg. a=["a", "b", "c"] with order [2, 0, 1] results in ["c", "a", "b"]
+def reorder(a, order):
+	# check for correct input
+	if not (isinstance(a, list) and isinstance(order, list)):
+		pln("Input data and order both have to be lists, but they are ", type(a), " and ", type(order), ".")
+		return
+	l = len(order)
+	if not len(a) == l:
+		pln("Input data and order both have to be of the same length, but they have length ", len(a), " and ", l, ".")
+		return
+	# Create new list
+	newList = [None]*l
+	try:
+		for i in range(l):
+			newList[i] = a[order[i]]
+	except TypeError:
+		pln("Order must be a list of integers.")
+		return
+	except IndexError:
+		pln("Order contains an out of bounds index.")
+		return
+	# Copy content back to original list
+	for i in range(l):
+		a[i] = newList[i]
 
 # Calculates the length of an array like structure
 # 
@@ -306,7 +375,7 @@ class dataTip:
 
 # Converts a string into a float (if possible) with respect to German point notation
 # 
-# @param a String to be converted
+# @param a string to be converted
 # @return number (None if input string isn't a number)
 def toFloat(a):
 	# replace all "," characters with "." to convert German notation to international standard
@@ -319,10 +388,35 @@ def toFloat(a):
 		pass
 	return value
 
+# Gets the name of a file from a file path.
+# 
+# @param path Path of the file.
+# @param cropExt Whether to crop the file extention.
+# @return The name of the file.
+def fileNameFromPath(path, cropExt=True):
+	if not isinstance(path, str):
+		pln("Path ", path, " must be a string.")
+		return None
+	cropExtension = 0
+	cropDirectory = 0
+	if cropExt:
+		try:
+			# Calculate number of characters for extension
+			cropExtension = len(path) - path.rindex(".")
+		except ValueError:
+			pln("Path: \"", path, "\" doesn't have an extension.")
+	try:
+		# Calculate number of characters for directory
+		cropDirectory = path.rindex("/") + 1
+	except ValueError:
+		pln("Path: \"", path, "\" has no directory. If the file is in the same directory as the calling program, use: \"./[filename]\".")
+	return path[cropDirectory:-cropExtension]
+
 # Calculates the next consecutive number and path to store for a file.
 # 
 # @param name Base name of the file.
 # @param dir Directory to place the file in, relative to the working directory.
+# @return Path to save the file in.
 def savePath(name, dir):
 	# get all previously saved files
 	files=glob.glob(dir + name + " *.*")
@@ -339,7 +433,7 @@ def savePath(name, dir):
 				continue
 			if int(fNum) > FilesMax:
 				FilesMax = int(fNum)
-	# Return String to save file
+	# Return string to save file
 	return dir + name + " " + str(FilesMax + 1)
 
 # Gets all visible plots of an axis.
@@ -474,7 +568,41 @@ def updateCanvas(canvas, ax, rescaleX=True, rescaleY=True):
 	# Flush events (if this was called by a tkinter event)
 	canvas.flush_events()
 
-# Function to build a GUI using the grid manager
+# Removes all entries of an item from a list and its associated data from other lists (index based).
+# 
+# @param item The item to be removed.
+# @param lists Lists to remove the item and its associated data from. Must be a tuple of lists, where the first list contains the item itself and subsequent ones its data.
+def removeFromLists(item, lists):
+	# Check input integrity
+	if not isinstance(lists, tuple):
+		pln("Lists must be a tuple of lists.")
+		return
+	if len(lists) == 0:
+		pln("No lists given to remove the item from.")
+		return
+	listLen = len(lists[0])
+	for l in lists[1:]:
+		if not isinstance(l, list):
+			pln("Lists must be a tuple of lists.")
+			return
+		if not len(l) == listLen:
+			pln("Lists are not of the same length.")
+			return
+	# If there is only one list, no indexing is required
+	if len(lists) == 1:
+		while lists[0].count(item) > 0:
+			lists[0].remove(item)
+	else:
+		while lists[0].count(item) > 0:
+			# Get item index
+			index = lists[0].index(item)
+			# Remove item
+			lists[0].pop(index)
+			# Remove all associated data
+			for l in lists[1:]:
+				l.pop(index)
+
+# Builds a GUI using the tkinter grid manager.
 # 
 # @param uiElements List of all the widgets to be displayed.
 # @param uiGridParams List containing Lists of the parameters required to display the widget as desired.
@@ -489,6 +617,38 @@ def buildUI(uiElements, uiGridParams):
 		uiElements[k].grid(row=uiGridParams[k][0], column=uiGridParams[k][1],
 								rowspan=uiGridParams[k][2], columnspan=uiGridParams[k][3],
 								sticky=uiGridParams[k][4])
+
+# Removes a widget and all its children from the GUI and given lists.
+# 
+# This doesn't just hide them like pack_forget(), but destroys them. The user can supply a tuple in place of each list to remove list entries by index based on the widget appearing in the first list of the tuple.
+# 
+# @param widget The widget to be removed.
+# @param lists List of Lists that the widget and its children will be removed from. Can also be a list of tuples of lists.
+def removeUI(widget, lists):
+	# Check input integrity
+	if not isinstance(lists, list):
+		pln("Argument \"lists\" must be a list of either lists or tuples of lists.")
+		return
+	if not isinstance(widget, tk.Widget):
+		pln("Argument \"widget\" must be a tkinter widget.")
+		return
+	# Handle the children of the widget first
+	children = widget.winfo_children()
+	for child in children:
+		removeUI(child, lists)
+	# Remove widget and associated data from lists
+	for l in lists:
+		# Check if list is actually a list
+		if not isinstance(l, list):
+			# Check if list is a tuple with further lists
+			if isinstance(l, tuple):
+				removeFromLists(widget, l)
+			else:
+				pln("List to remove from is neither a list nor a tuple of lists.")
+				return
+		removeFromLists(widget, (l,))
+	# Destroy the widget
+	widget.destroy()
 
 # Vertical variant of the matplotlib toolbar (lacks the display of the mouse coordinates)
 class VerticalPlotToolbar(NavigationToolbar2Tk):
@@ -557,6 +717,8 @@ def serPort(name="Auto", command=None, question=None, answer=None, final=None, s
 				if final != None:
 					port.write(final)
 					port.readline()
+			else:
+				raise SerialDisconnect
 		else:
 			port = serial.Serial(name)
 		return port
